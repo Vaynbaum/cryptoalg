@@ -55,7 +55,11 @@ export class ApplicationTheoremFermaComponent implements OnInit {
       this.array.push({ num: 2 });
       num /= 2;
     }
-    this.array = this.factorizationService.allFact(num, this.array);
+    let arr = this.factorizationService.allFact(num, this.array);
+    this.array=[]
+    arr.forEach((item) => {
+      if (item != 1) this.array.push({ num: item });
+    });
   }
 
   calculateSystem() {
@@ -105,25 +109,22 @@ export class ApplicationTheoremFermaComponent implements OnInit {
       this.array.sort((a, b) => {
         return a.num - b.num;
       });
-
       answer += `m = ${this.m} = `;
       this.array.forEach((item) => {
-        if (item.num != 1) answer += `${item.num} * `;
+        answer += `${item.num} * `;
       });
       answer = answer.slice(0, -3);
       answer += '<br><br>';
 
       this.array.forEach((item) => {
-        if (item.num != 1) {
-          item.pow = this.k % (item.num - 1);
-          this.comparisons.push({
-            a: 1,
-            b: this.a ** item.pow % item.num,
-            m: item.num,
-          });
+        item.pow = this.k % (item.num - 1);
+        this.comparisons.push({
+          a: 1,
+          b: this.a ** item.pow % item.num,
+          m: item.num,
+        });
 
-          answer += `${this.k} (mod (${item.num} - 1)) = ${item.pow}<br>`;
-        }
+        answer += `${this.k} (mod (${item.num} - 1)) = ${item.pow}<br>`;
       });
       answer += '<br>';
       this.array.forEach((item) => {
