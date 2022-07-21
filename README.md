@@ -3,7 +3,7 @@
 [Live Demo on StackBlitz ⚡️](https://stackblitz.com/edit/cryptoalg)
 
 ***
-
+# About the app
 Includes: 
 1.  Euclid algorithm
 2.  Extended Euclid algorithm
@@ -20,3 +20,6 @@ Includes:
 13. Deduction class
 14. Comparison solving and comparison systems
 15. Modular exponentiation
+
+# Technologies in the project
+Application is written using the Angular framework.
