@@ -1,0 +1,11 @@
+<app-title title="Составное или простое число:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите число N"
+></app-input>
+<br>
+
+<app-buttons (click)="prime()" title="Посчитать"></app-buttons>
+
+<p id="presult" *ngIf="(N != undefined) && (N > 0)"></p>

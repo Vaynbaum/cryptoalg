@@ -1,0 +1,20 @@
+<app-title title="Наименьшее общее кратное:"></app-title>
+
+<app-input
+  (changeInput)="onChangeInp1($event)"
+  holder="Введите первое число"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeInp2($event)"
+  holder="Введите второе число"
+></app-input>
+<br />
+
+<app-buttons (click)="scmCalc()" title="Посчитать"></app-buttons>
+
+<p
+  id="scmresult"
+  *ngIf="inp1 != undefined && inp1 != 0 && inp2 != undefined && inp2 != 0"
+></p>

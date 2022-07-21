@@ -1,0 +1,39 @@
+<app-title title="Обратные элементы приведенной системы:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите модуль M"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Посчитать"></app-buttons>
+
+<div id="reverse-result" *ngIf="m != undefined && m > 0">
+  <table *ngIf="flag">
+    <td>
+      <tr>
+        U({{
+          m
+        }})|
+      </tr>
+      <tr>
+        U<span style="color:#663399;">({{ m }})</span
+        >|
+      </tr>
+    </td>
+
+    <td *ngFor="let obj of objrev">
+      <tr>
+        {{
+          obj.syst
+        }}
+      </tr>
+
+      <tr>
+        {{
+          obj.rev
+        }}
+      </tr>
+    </td>
+  </table>
+</div>

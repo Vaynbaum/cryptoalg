@@ -1,0 +1,35 @@
+<app-title title="Алгоритм Евклида:"></app-title>
+
+<app-input
+  (changeInput)="onChangeInp1($event)"
+  holder="Большее число"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeInp2($event)"
+  holder="Меньшее число"
+></app-input>
+<br />
+
+<app-buttons (click)="gsdCalc()" title="Посчитать"></app-buttons>
+
+<table *ngIf="inp1 != undefined && inp1 != 0 && inp2 != undefined && inp2 != 0">
+  <thead>
+    <tr>
+      <th>r</th>
+      <th>&ensp;q</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td id="ri"></td>
+      <td id="qi"></td>
+    </tr>
+  </tbody>
+</table>
+<p
+  id="result"
+  *ngIf="inp1 != undefined && inp1 != 0 && inp2 != undefined && inp2 != 0"
+></p>

@@ -1,0 +1,11 @@
+<app-title title="Функция Эйлера:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите число N"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Вычислить"></app-buttons>
+
+<p id="euresult" *ngIf="n != undefined && n > 0"></p>

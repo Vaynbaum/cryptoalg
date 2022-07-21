@@ -1,0 +1,33 @@
+<app-title title="Метод факторизации Ферма:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите число N"
+></app-input>
+<br>
+
+<app-buttons (click)="ferma()" title="Вычислить"></app-buttons>
+
+<table *ngIf="N != undefined && N > 0 && N % 2 != 0">
+  <thead>
+    <tr>
+      <th>k</th>
+      <th>x</th>
+      <th>y^2</th>
+      <th>y=&#8730;y^2</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td id="k"></td>
+      <td id="x"></td>
+      <td id="y2"></td>
+      <td id="y"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p id="fresult" *ngIf="N != undefined && N > 0 && N % 2 != 0"></p>
+
+<app-warning *ngIf="N != undefined && N > 0 && N % 2 == 0" title="Введите нечетное число!"></app-warning>

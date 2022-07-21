@@ -1,0 +1,44 @@
+<app-title title="Расширенный алгоритм Евклида:"></app-title>
+
+<app-input
+  (changeInput)="onChangeInp1($event)"
+  holder="Большее число"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeInp2($event)"
+  holder="Меньшее число"
+></app-input>
+<br />
+
+<app-buttons (click)="adGsdCalc()" title="Посчитать"></app-buttons>
+
+<table
+  *ngIf="
+    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
+  "
+>
+  <thead>
+    <tr>
+      <th>r</th>
+      <th>&ensp;q</th>
+      <th>&ensp;x</th>
+      <th>&ensp;y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="adri"></td>
+      <td id="adqi"></td>
+      <td id="adxi"></td>
+      <td id="adyi"></td>
+    </tr>
+  </tbody>
+</table>
+<p
+  id="adresult"
+  *ngIf="
+    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
+  "
+></p>

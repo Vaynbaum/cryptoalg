@@ -1,0 +1,14 @@
+p {
+  font-family: Lato;
+}
+.methods {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 6%;
+  color: #ffffff;
+  background-color: #663399;
+  box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.137);
+}

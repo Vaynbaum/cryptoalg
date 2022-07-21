@@ -1,0 +1,59 @@
+<div class="container">
+  <app-title title="Решение системы сравнений:"></app-title>
+
+  <div class="comparison">
+    <app-title title="a * x ≣ b (mod m)"></app-title>
+
+    <br />
+    <app-input
+      (changeInput)="onChangeA($event)"
+      holder="Введите число a"
+    ></app-input>
+    <br />
+
+    <app-input
+      (changeInput)="onChangeB($event)"
+      holder="Введите число b"
+    ></app-input>
+    <br />
+
+    <app-input
+      (changeInput)="onChangeM($event)"
+      holder="Введите модуль m"
+    ></app-input>
+    <br />
+
+    <div class="btns">
+      <app-buttons (click)="pop()" title="Удалить последнее"></app-buttons>
+      <app-buttons (click)="push()" title="Добавить новое"></app-buttons>
+    </div>
+  </div>
+
+  <div *ngIf="comparisons.length != 0">
+    <p *ngFor="let comp of comparisons">
+      {{ comp.a }} * x ≣ {{ comp.b }} (mod {{ comp.m }})
+    </p>
+  </div>
+
+  <br />
+  <app-buttons (click)="calc()" title="Вычислить"></app-buttons>
+
+  <p id="systCompModule"></p>
+
+  <table *ngIf="compShow.length != 0">
+    <tr>
+      <td>bi</td>
+      <td>mi</td>
+      <td>Mi</td>
+      <td>yi</td>
+    </tr>
+    <tr *ngFor="let comp of compShow">
+      <td>{{ comp.b }}</td>
+      <td>{{ comp.m }}</td>
+      <td>{{ comp.mi }}</td>
+      <td>u{{ comp.mi }} (mod {{ comp.m }}) = {{ comp.yi }}</td>
+    </tr>
+  </table>
+
+  <p id="resSystComp"></p>
+</div>

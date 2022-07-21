@@ -1,0 +1,21 @@
+<app-title title="Решето Эратосфена:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите число N"
+></app-input>
+<br />
+
+<app-buttons (click)="sieve()" title="Посчитать"> </app-buttons>
+
+<p id="eresult" *ngIf="N != undefined && N > 0 && N < 100000"></p>
+
+<app-warning
+  *ngIf="N != undefined && N > 0 && N >= 100000"
+  title="Очень большое число!"
+></app-warning>
+
+<app-warning
+  *ngIf="N != undefined && N > 0 && N >= 100000"
+  title="Пожалуйста введите меньше"
+></app-warning>

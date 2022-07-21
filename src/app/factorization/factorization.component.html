@@ -1,0 +1,11 @@
+<app-title title="Разложение числа:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите число N"
+></app-input>
+<br />
+
+<app-buttons (click)="fact()" title="Посчитать"></app-buttons>
+
+<p id="factresult" *ngIf="N != undefined && N > 0"></p>

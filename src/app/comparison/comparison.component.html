@@ -1,0 +1,28 @@
+<app-title title="Решение сравнения:"></app-title>
+<app-title title="a * x ≣ b (mod m)"></app-title>
+
+<app-input
+  (changeInput)="onChangeA($event)"
+  holder="Введите число a"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeB($event)"
+  holder="Введите число b"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeM($event)"
+  holder="Введите модуль M"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Посчитать"></app-buttons>
+
+<div *ngIf="b != undefined && a != undefined && m != undefined && m > 0">
+  <p *ngFor="let result of results">
+    {{result}}
+  </p>
+</div>

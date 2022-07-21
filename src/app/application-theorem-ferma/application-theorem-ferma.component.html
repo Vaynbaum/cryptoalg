@@ -1,0 +1,40 @@
+<app-title title="a^k (mod m) - ?"></app-title>
+
+<br />
+<app-input
+  (changeInput)="onChangeA($event)"
+  holder="Введите число a"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeK($event)"
+  holder="Введите число k"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeM($event)"
+  holder="Введите модуль m"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Посчитать"></app-buttons>
+
+<p id="appAnswerCompModule"></p>
+<table *ngIf="compShow.length != 0">
+  <tr>
+    <td>bi</td>
+    <td>mi</td>
+    <td>Mi</td>
+    <td>yi</td>
+  </tr>
+  <tr *ngFor="let comp of compShow">
+    <td>{{ comp.b }}</td>
+    <td>{{ comp.m }}</td>
+    <td>{{ comp.mi }}</td>
+    <td>u{{ comp.mi }} (mod {{ comp.m }}) = {{ comp.yi }}</td>
+  </tr>
+</table>
+
+<p id="appResSystComp"></p>

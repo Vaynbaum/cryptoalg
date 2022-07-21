@@ -1,0 +1,17 @@
+<app-title title="Класс вычетов:"></app-title>
+
+<app-input
+  (changeInput)="onChangeN($event)"
+  holder="Введите число N"
+></app-input>
+<br />
+
+<app-input
+  (changeInput)="onChangeM($event)"
+  holder="Введите модуль M"
+></app-input>
+<br />
+
+<app-buttons (click)="deduction()" title="Посчитать"></app-buttons>
+
+<p id="deduction" *ngIf="n != undefined && m != undefined && m > 0"></p>

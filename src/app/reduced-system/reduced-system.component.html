@@ -1,0 +1,11 @@
+<app-title title="Приведенная система вычетов:"></app-title>
+
+<app-input
+  (changeInput)="onChange($event)"
+  holder="Введите модуль M"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Посчитать"></app-buttons>
+
+<p id="reduced-result" *ngIf="m != undefined && m > 0"></p>
