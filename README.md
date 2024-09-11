@@ -2,8 +2,6 @@
 
 [Live Demo on StackBlitz ⚡️](https://stackblitz.com/edit/cryptoalg)
 
-![image](https://github.com/user-attachments/assets/59803428-ed47-4c7b-972c-88d4dd82f08c)
-
 ***
 # About the app
 Includes: 
@@ -22,6 +20,10 @@ Includes:
 13. Deduction class
 14. Comparison solving and comparison systems
 15. Modular exponentiation
+
+# How it looks like
+
+![image](https://github.com/user-attachments/assets/f50ce866-8f96-4e0d-a015-aee1e50317fd)
 
 # Technologies in the project
 Application is written using the Angular framework.
