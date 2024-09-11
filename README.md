@@ -2,6 +2,8 @@
 
 [Live Demo on StackBlitz ⚡️](https://stackblitz.com/edit/cryptoalg)
 
+![image](https://github.com/user-attachments/assets/59803428-ed47-4c7b-972c-88d4dd82f08c)
+
 ***
 # About the app
 Includes: 
