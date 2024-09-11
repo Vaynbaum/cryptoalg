@@ -1,29 +1,29 @@
 # Cryptology algorithms
 
-[Live Demo on StackBlitz ⚡️](https://stackblitz.com/edit/cryptoalg)
+[Демонстрация на StackBlitz ⚡️](https://stackblitz.com/edit/cryptoalg)
 
 ***
-# About the app
-Includes: 
-1.  Euclid algorithm
-2.  Extended Euclid algorithm
-3.  Least common multiple
-4.  Sieve of Eratosthenes
-5.  Sieve of Sundaram
-6.  Fermat's factorization method
-7.  Checking a number is composite
-8.  Decomposition of a number
-9.  Get the remainder
-10. Euler's totient function
-11. Reduced deduction system
-12. Inverse elements of the reduced system
-13. Deduction class
-14. Comparison solving and comparison systems
-15. Modular exponentiation
+# О приложение
+Включает: 
+1. Алгоритм Евклида
+2. Расширенный алгоритм Евклида
+3. Наименьшее общее кратное
+4. Решето Эратосфена
+5. Решето Сундарама
+6. Метод разложения на множители Ферма
+7. Проверка того, является ли число составным
+8. Разложение числа
+9. Получение остатка
+10. Общая функция Эйлера
+11. Сокращенная система вычитания
+12. Обратные элементы сокращенной системы
+13. Класс вычитания
+14. Сравнительные решения и системы сравнения
+15. Модульное возведение в степень
 
-# How it looks like
+# Как это выглядит
 
 ![image](https://github.com/user-attachments/assets/f50ce866-8f96-4e0d-a015-aee1e50317fd)
 
-# Technologies in the project
-Application is written using the Angular framework.
+# Технологии в приложение
+Приложение написано с использованием фреймворка Angular.
