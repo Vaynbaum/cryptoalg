@@ -20,9 +20,8 @@ export class FermaService {
   ferma_hidden(n: number) {
     let x_begin = Math.floor(Math.sqrt(n));
     let k = 0;
-    while (x_begin ** 2 - n < 0) {
-      x_begin += 1;
-    }
+
+    while (x_begin ** 2 - n < 0) x_begin += 1;
 
     this.x = x_begin + k;
     let y2 = this.x * this.x - n;
@@ -35,7 +34,6 @@ export class FermaService {
       this.y = Math.sqrt(y2);
     }
 
-    let arr: number[] = [this.x, this.y];
-    return arr;
+    return [this.x, this.y];
   }
 }
