@@ -25,21 +25,22 @@ export class FuncEulerComponent implements OnInit {
   allFact(n: number) {
     let arr: number[] = [0, 0];
     arr = this.fermaService.ferma_hidden(n);
+    let dif = arr[0] - arr[1];
+    let sum = arr[0] + arr[1];
 
-    if (arr[0] + arr[1] == 1 || arr[0] - arr[1] == 1) {
-      let num = arr[0] + arr[1];
-      let obj = this.dict.find((obj) => obj.num == num);
-      if (obj) obj.cnt++;
-      else this.dict.push({ num: num, cnt: 1 });
-
-      num = arr[0] - arr[1];
-      obj = this.dict.find((obj) => obj.num == num);
-      if (obj) obj.cnt++;
-      else this.dict.push({ num: num, cnt: 1 });
+    if (sum == 1 || dif == 1) {
+      this.addValue(sum);
+      this.addValue(arr[0] - arr[1]);
     } else {
-      this.allFact(arr[0] + arr[1]);
-      this.allFact(arr[0] - arr[1]);
+      this.allFact(sum);
+      this.allFact(dif);
     }
+  }
+  
+  addValue(num: number) {
+    let obj = this.dict.find((obj) => obj.num == num);
+    if (obj) obj.cnt++;
+    else this.dict.push({ num: num, cnt: 1 });
   }
 
   displayResult() {
@@ -78,9 +79,7 @@ export class FuncEulerComponent implements OnInit {
       let num = this.n;
 
       while (num % 2 == 0) {
-        let obj = this.dict.find((obj) => obj.num == 2);
-        if (obj) obj.cnt++;
-        else this.dict.push({ num: 2, cnt: 1 });
+        this.addValue(2);
         num /= 2;
       }
       this.allFact(num);
