@@ -3,16 +3,29 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sieve-eratosthenes',
   templateUrl: './sieve-eratosthenes.component.html',
-  styleUrls: ['./sieve-eratosthenes.component.css']
+  styleUrls: ['./sieve-eratosthenes.component.css'],
 })
 export class SieveEratosthenesComponent implements OnInit {
   N: number | undefined;
   constructor() {}
 
   ngOnInit() {}
-  public onChange(n:number){
+  public onChange(n: number) {
     this.N = n;
   }
+  displayResult(primes: number[]) {
+    let answer = `Ответ: `;
+
+    for (let i = 2; i < this.N; ++i)
+      if (primes[i] != 0) answer += `${primes[i]}, `;
+    answer = answer.slice(0, -2);
+
+    let element: HTMLElement = document.getElementById(
+      'eresult'
+    ) as HTMLElement;
+    element.innerHTML = answer;
+  }
+
   sieve() {
     if (this.N != undefined && this.N > 0 && this.N < 100000) {
       const len = this.N + 1;
@@ -27,15 +40,7 @@ export class SieveEratosthenesComponent implements OnInit {
         }
       }
 
-      let answer = `Ответ: `;
-
-      for (let i = 2; i < this.N; ++i)
-        if (primes[i] != 0) answer += `${primes[i]}, `;
-
-      let element: HTMLElement = document.getElementById(
-        'eresult'
-      ) as HTMLElement;
-      element.innerHTML = answer;
+      this.displayResult(primes);
     }
   }
 }

@@ -27,9 +27,7 @@ export class GsdService {
   gsd(a: number, b: number) {
     if (b == 0) return a;
     else {
-      const tmp = a % b;
-      a = b;
-      b = tmp;
+      [a, b] = [b, a % b];
       return this.gsd(a, b);
     }
   }
@@ -47,10 +45,8 @@ export class GsdService {
       this.adYi = y2;
       return a;
     } else {
-      const tmp = a % b;
       this.addiv = Math.floor(a / b);
-      a = b;
-      b = tmp;
+      [a, b] = [b, a % b];
 
       this.adXi = x2 - this.addiv * x1;
       this.adYi = y2 - this.addiv * y1;

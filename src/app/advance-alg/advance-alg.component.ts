@@ -43,70 +43,75 @@ export class AdvanceAlgComponent implements OnInit {
       this.adYi = y2;
       return a;
     } else {
-      const tmp = a % b;
       this.addiv = Math.floor(a / b);
-      a = b;
-      b = tmp;
+      // swap a and b
+      [a, b] = [b, a % b];
 
       this.adXi = x2 - this.addiv * x1;
       this.adYi = y2 - this.addiv * y1;
 
-      this.adStrRi += `${b}<br/>`;
-      this.adStrQi += `&ensp;${this.addiv}<br>`;
-      this.adStrXi += `&ensp;${this.adXi}<br>`;
-      this.adStrYi += `&ensp;${this.adYi}<br>`;
-
+      this.saveStateToDisplay(b);
       return this.gsdAdvance(a, b, this.adXi, x1, this.adYi, y1);
     }
   }
 
+  saveStateToDisplay(b: number | undefined) {
+    this.adStrRi += `${b}<br/>`;
+    this.adStrQi += `&ensp;${this.addiv}<br>`;
+    this.adStrXi += `&ensp;${this.adXi}<br>`;
+    this.adStrYi += `&ensp;${this.adYi}<br>`;
+  }
+
+  display(adinp1: number, adinp2: number) {
+    let element: HTMLElement = document.getElementById('adri') as HTMLElement;
+    element.innerHTML = this.adStrRi;
+
+    element = document.getElementById('adqi') as HTMLElement;
+    element.innerHTML = this.adStrQi;
+
+    element = document.getElementById('adxi') as HTMLElement;
+    element.innerHTML = this.adStrXi;
+
+    element = document.getElementById('adyi') as HTMLElement;
+    element.innerHTML = this.adStrYi;
+
+    let answer = `Ответ: ${this.adresult} = `;
+    if (adinp1 >= 0) answer += `${adinp1} * `;
+    else answer += `(${adinp1}) * `;
+
+    if (this.adXi >= 0) answer += `${this.adXi} + `;
+    else answer += `(${this.adXi}) + `;
+
+    if (adinp2 >= 0) answer += `${adinp2} * `;
+    else answer += `(${adinp2}) * `;
+
+    if (this.adYi >= 0) answer += `${this.adYi}`;
+    else answer += `(${this.adYi})`;
+
+    element = document.getElementById('adresult') as HTMLElement;
+    element.innerHTML = answer;
+  }
+  initValueDisplayVar(adinp1: number, adinp2: number) {
+    this.adStrRi = `${adinp1}<br/>${adinp2}<br/>`;
+    this.adStrQi = `&ensp;-<br/>&ensp;-<br/>`;
+    this.adStrXi = `&ensp;1<br/>&ensp;0<br/>`;
+    this.adStrYi = `&ensp;0<br/>&ensp;1<br/>`;
+  }
+
   adGsdCalc() {
-    if (this.adinp1 < this.adinp2) {
-      const tmp = this.adinp1;
-      this.adinp1 = this.adinp2;
-      this.adinp2 = tmp;
-    }
+    let adinp1 = this.adinp1;
+    let adinp2 = this.adinp2;
+    if (adinp1 < adinp2) [adinp1, adinp2] = [adinp2, adinp1];
 
     if (
-      this.adinp1 != undefined &&
-      this.adinp1 != 0 &&
-      this.adinp2 != undefined &&
-      this.adinp2 != 0
+      adinp1 != undefined &&
+      adinp1 != 0 &&
+      adinp2 != undefined &&
+      adinp2 != 0
     ) {
-      this.adStrRi = `${this.adinp1}<br/>${this.adinp2}<br/>`;
-      this.adStrQi = `&ensp;-<br/>&ensp;-<br/>`;
-      this.adStrXi = `&ensp;1<br/>&ensp;0<br/>`;
-      this.adStrYi = `&ensp;0<br/>&ensp;1<br/>`;
-
-      this.adresult = this.gsdAdvance(this.adinp1, this.adinp2, 0, 1, 1, 0);
-
-      let element: HTMLElement = document.getElementById('adri') as HTMLElement;
-      element.innerHTML = this.adStrRi;
-
-      element = document.getElementById('adqi') as HTMLElement;
-      element.innerHTML = this.adStrQi;
-
-      element = document.getElementById('adxi') as HTMLElement;
-      element.innerHTML = this.adStrXi;
-
-      element = document.getElementById('adyi') as HTMLElement;
-      element.innerHTML = this.adStrYi;
-
-      let answer = `Ответ: ${this.adresult} = `;
-      if (this.adinp1 >= 0) answer += `${this.adinp1} * `;
-      else answer += `(${this.adinp1}) * `;
-
-      if (this.adXi >= 0) answer += `${this.adXi} + `;
-      else answer += `(${this.adXi}) + `;
-
-      if (this.adinp2 >= 0) answer += `${this.adinp2} * `;
-      else answer += `(${this.adinp2}) * `;
-
-      if (this.adYi >= 0) answer += `${this.adYi}`;
-      else answer += `(${this.adYi})`;
-
-      element = document.getElementById('adresult') as HTMLElement;
-      element.innerHTML = answer;
+      this.initValueDisplayVar(adinp1, adinp2);
+      this.adresult = this.gsdAdvance(adinp1, adinp2, 0, 1, 1, 0);
+      this.display(adinp1, adinp2);
     }
   }
 }

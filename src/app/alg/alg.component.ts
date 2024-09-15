@@ -27,42 +27,41 @@ export class AlgComponent implements OnInit {
   gsd(a: number, b: number) {
     if (b == 0) return a;
     else {
-      const tmp = a % b;
       this.div = Math.floor(a / b);
-      a = b;
-      b = tmp;
-      this.strRi += `${b}<br/>`;
-      this.strQi += `&ensp;${this.div}<br>`;
+      [a, b] = [b, a % b];
+
+      this.saveStateToDisplay(b);
       return this.gsd(a, b);
     }
   }
+  saveStateToDisplay(b: number | undefined) {
+    this.strRi += `${b}<br/>`;
+    this.strQi += `&ensp;${this.div}<br>`;
+  }
+  initValueDisplayVar(inp1: number, inp2: number) {
+    this.strRi = `${inp1}<br/>${inp2}<br/>`;
+    this.strQi = `&ensp;-<br/>&ensp;-<br/>`;
+  }
+  display() {
+    let element: HTMLElement = document.getElementById('ri') as HTMLElement;
+    element.innerHTML = this.strRi;
+
+    element = document.getElementById('qi') as HTMLElement;
+    element.innerHTML = this.strQi;
+
+    const answer = `Ответ: ${this.result}`;
+    element = document.getElementById('result') as HTMLElement;
+    element.innerHTML = answer;
+  }
   gsdCalc() {
-    if (this.inp1 < this.inp2) {
-      const tmp = this.inp1;
-      this.inp1 = this.inp2;
-      this.inp2 = tmp;
-    }
+    let inp1 = this.inp1;
+    let inp2 = this.inp2;
+    if (inp1 < inp2) [inp1, inp2] = [inp2, inp1];
 
-    if (
-      this.inp1 != undefined &&
-      this.inp1 != 0 &&
-      this.inp2 != undefined &&
-      this.inp2 != 0
-    ) {
-      this.strRi = `${this.inp1}<br/>${this.inp2}<br/>`;
-      this.strQi = `&ensp;-<br/>&ensp;-<br/>`;
-
-      this.result = this.gsd(this.inp1, this.inp2);
-
-      let element: HTMLElement = document.getElementById('ri') as HTMLElement;
-      element.innerHTML = this.strRi;
-
-      element = document.getElementById('qi') as HTMLElement;
-      element.innerHTML = this.strQi;
-
-      const answer = `Ответ: ${this.result}`;
-      element = document.getElementById('result') as HTMLElement;
-      element.innerHTML = answer;
+    if (inp1 != undefined && inp1 != 0 && inp2 != undefined && inp2 != 0) {
+      this.initValueDisplayVar(inp1, inp2);
+      this.result = this.gsd(inp1, inp2);
+      this.display();
     }
   }
 }

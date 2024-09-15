@@ -3,15 +3,26 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sieve-sundarama',
   templateUrl: './sieve-sundarama.component.html',
-  styleUrls: ['./sieve-sundarama.component.css']
+  styleUrls: ['./sieve-sundarama.component.css'],
 })
 export class SieveSundaramaComponent implements OnInit {
   N: number | undefined;
   constructor() {}
 
   ngOnInit() {}
-  public onChange(n:number){
+  public onChange(n: number) {
     this.N = n;
+  }
+  displayResult(len: number, primes: number[]) {
+    let answer = `Ответ: 2, `;
+    for (let i = 1; i < len; ++i)
+      if (primes[i] != 0) answer += `${primes[i] * 2 + 1}, `;
+
+    answer = answer.slice(0, -2);
+    let element: HTMLElement = document.getElementById(
+      'sunresult'
+    ) as HTMLElement;
+    element.innerHTML = answer;
   }
   sieve() {
     if (this.N != undefined && this.N > 0) {
@@ -31,14 +42,7 @@ export class SieveSundaramaComponent implements OnInit {
         }
       }
 
-      let element: HTMLElement = document.getElementById(
-        'sunresult'
-      ) as HTMLElement;
-      let answer = `Ответ: 2, `;
-      for (let i = 1; i < len; ++i)
-        if (primes[i] != 0) answer += `${primes[i] * 2 + 1}, `;
-
-      element.innerHTML = answer;
+      this.displayResult(len, primes);
     }
   }
 }
