@@ -66,21 +66,14 @@ export class FuncEulerComponent implements OnInit {
       let num = this.n;
 
       while (num % 2 == 0) {
-        if (
-          this.dict.find((obj) => {
-            return obj.num == 2;
-          })
-        )
+        if (this.dict.find((obj) => obj.num == 2))
           this.dict.find((obj) => {
             if (obj.num == 2) obj.cnt++;
           });
-        else {
-          let num = 2;
-          let cnt = 1;
-          this.dict.push({ num, cnt });
-        }
+        else this.dict.push({ num: 2, cnt: 1 });
         num /= 2;
       }
+      console.log(this.dict);
       this.allFact(num);
 
       let mult = 1;
