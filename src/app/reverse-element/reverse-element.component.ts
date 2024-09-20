@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NumberConversionService } from '../shared/services/number-conversion.service';
 
 @Component({
   selector: 'app-reverse-element',
@@ -15,8 +16,6 @@ export class ReverseElementComponent implements OnInit {
   public onChangeM(n: number) {
     this.m = n;
   }
-  adinp1: number | undefined;
-  adinp2: number | undefined;
   adXi: number | undefined;
   adYi: number | undefined;
   addiv: number | undefined;
@@ -25,7 +24,7 @@ export class ReverseElementComponent implements OnInit {
   adStrXi: string;
   adStrYi: string;
   adresult: number | undefined;
-  constructor() {
+  constructor(private numberConversionService: NumberConversionService) {
     this.adStrRi = '';
     this.adStrQi = '';
     this.adStrYi = '';
@@ -33,12 +32,7 @@ export class ReverseElementComponent implements OnInit {
   }
 
   ngOnInit() {}
-  public onChangeInp1(n: number) {
-    this.adinp1 = n;
-  }
-  public onChangeInp2(n: number) {
-    this.adinp2 = n;
-  }
+
   gsdAdvance(
     a: number | undefined,
     b: number | undefined,
@@ -71,7 +65,7 @@ export class ReverseElementComponent implements OnInit {
     this.adStrYi += `&ensp;${this.adYi}<br>`;
   }
 
-  display(adinp1: number, adinp2: number) {
+  display(a: number, m: number) {
     let element: HTMLElement = document.getElementById('adri2') as HTMLElement;
     element.innerHTML = this.adStrRi;
 
@@ -84,20 +78,27 @@ export class ReverseElementComponent implements OnInit {
     element = document.getElementById('adyi2') as HTMLElement;
     element.innerHTML = this.adStrYi;
 
-    let answer = `Ответ: ${this.adresult} = `;
-    if (adinp1 >= 0) answer += `${adinp1} * `;
-    else answer += `(${adinp1}) * `;
+    let answer = `${this.adresult} = `;
+    if (a >= 0) answer += `${a} * `;
+    else answer += `(${a}) * `;
 
     if (this.adXi >= 0) answer += `${this.adXi} + `;
     else answer += `(${this.adXi}) + `;
 
-    if (adinp2 >= 0) answer += `${adinp2} * `;
-    else answer += `(${adinp2}) * `;
+    if (m >= 0) answer += `${m} * `;
+    else answer += `(${m}) * `;
 
     if (this.adYi >= 0) answer += `${this.adYi}`;
     else answer += `(${this.adYi})`;
 
     element = document.getElementById('adresult2') as HTMLElement;
+    element.innerHTML = answer;
+
+    answer = `Ответ: Обратный элемент ${a} по модулю ${m} = ${this.numberConversionService.numberConversion(
+      this.adXi,
+      m
+    )}`;
+    element = document.getElementById('adresult3') as HTMLElement;
     element.innerHTML = answer;
   }
   initValueDisplayVar(adinp1: number, adinp2: number) {
@@ -108,19 +109,13 @@ export class ReverseElementComponent implements OnInit {
   }
 
   adGsdCalc() {
-    let adinp1 = this.adinp1;
-    let adinp2 = this.adinp2;
-    if (adinp1 < adinp2) [adinp1, adinp2] = [adinp2, adinp1];
+    let a = this.a;
+    let m = this.m;
 
-    if (
-      adinp1 != undefined &&
-      adinp1 != 0 &&
-      adinp2 != undefined &&
-      adinp2 != 0
-    ) {
-      this.initValueDisplayVar(adinp1, adinp2);
-      this.adresult = this.gsdAdvance(adinp1, adinp2, 0, 1, 1, 0);
-      this.display(adinp1, adinp2);
+    if (a != undefined && a != 0 && m != undefined && m != 0) {
+      this.initValueDisplayVar(a, m);
+      this.adresult = this.gsdAdvance(a, m, 0, 1, 1, 0);
+      this.display(a, m);
     }
   }
 }

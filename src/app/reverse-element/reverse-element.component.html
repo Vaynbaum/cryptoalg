@@ -9,12 +9,9 @@
   holder="Введите модуль M"
 ></app-input>
 <br />
+<app-buttons (click)="adGsdCalc()" title="Посчитать"></app-buttons>
 
-<table
-  *ngIf="
-    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
-  "
->
+<table *ngIf="a != undefined && a != 0 && m != undefined && m != 0">
   <thead>
     <tr>
       <th>r</th>
@@ -34,7 +31,9 @@
 </table>
 <p
   id="adresult2"
-  *ngIf="
-    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
-  "
+  *ngIf="a != undefined && a != 0 && m != undefined && m != 0"
+></p>
+<p
+  id="adresult3"
+  *ngIf="a != undefined && a != 0 && m != undefined && m != 0"
 ></p>
