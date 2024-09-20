@@ -24,6 +24,7 @@ import { GsdService } from './shared/services/gsd.service';
 import { FermaService } from './shared/services/ferma.service';
 import { NumberConversionService } from './shared/services/number-conversion.service';
 import { FactorizationService } from './shared/services/factorisation.service';
+import { ReverseElementComponent } from './reverse-element/reverse-element.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, CompModule],
@@ -41,6 +42,7 @@ import { FactorizationService } from './shared/services/factorisation.service';
     FuncEulerComponent,
     ReducedSystemComponent,
     ReverseComponent,
+    ReverseElementComponent,
     DeductionClassComponent,
     ComparisonComponent,
     ComparisonSystemComponent,
