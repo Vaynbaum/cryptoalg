@@ -1,0 +1,40 @@
+<app-title title="Обратный элементы в Zm:"></app-title>
+
+<app-input
+  (changeInput)="onChangeA($event)"
+  holder="Введите число а"
+></app-input>
+<app-input
+  (changeInput)="onChangeM($event)"
+  holder="Введите модуль M"
+></app-input>
+<br />
+
+<table
+  *ngIf="
+    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
+  "
+>
+  <thead>
+    <tr>
+      <th>r</th>
+      <th>&ensp;q</th>
+      <th>&ensp;x</th>
+      <th>&ensp;y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="adri2"></td>
+      <td id="adqi2"></td>
+      <td id="adxi2"></td>
+      <td id="adyi2"></td>
+    </tr>
+  </tbody>
+</table>
+<p
+  id="adresult2"
+  *ngIf="
+    adinp1 != undefined && adinp1 != 0 && adinp2 != undefined && adinp2 != 0
+  "
+></p>
