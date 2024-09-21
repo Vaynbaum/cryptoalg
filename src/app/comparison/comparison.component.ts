@@ -32,6 +32,13 @@ export class ComparisonComponent implements OnInit {
     this.m = m;
   }
 
+  saveStateToDisplay() {
+    let answer = `${this.a != 1 ? `*${this.adXi}/ ` : ''}${this.a} * x ≣ ${
+      this.b
+    } (mod ${this.m})`;
+    this.results.push(answer);
+  }
+
   calcSimpleComparison() {
     this.gsdService.gsdAdvance(this.a, this.m, 0, 1, 1, 0);
     this.adXi = this.gsdService.adXi;
@@ -41,8 +48,15 @@ export class ComparisonComponent implements OnInit {
       this.adXi,
       this.m
     );
+    this.saveStateToDisplay();
+
     let res = (this.adXi * this.b) % this.m;
     return this.numberConversionService.numberConversion(res, this.m);
+  }
+
+  displayOneSolution(result: number) {
+    let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
+    this.results.push(answer);
   }
 
   calc() {
@@ -53,19 +67,18 @@ export class ComparisonComponent implements OnInit {
       this.m > 0
     ) {
       this.results = [];
-
       let result = 0;
 
       this.a = this.numberConversionService.numberConversion(this.a, this.m);
       this.b = this.numberConversionService.numberConversion(this.b, this.m);
       let tmp1 = this.a > this.m ? this.a : this.m;
       let tmp2 = this.a < this.m ? this.a : this.m;
+
       let d = this.gsdService.gsd(tmp1, tmp2);
 
       if (d == 1) {
         result = this.calcSimpleComparison();
-        let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
-        this.results.push(answer);
+        this.displayOneSolution(result);
       } else if (this.b % d == 0) {
         this.a /= d;
         this.b /= d;
