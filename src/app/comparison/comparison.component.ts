@@ -58,6 +58,28 @@ export class ComparisonComponent implements OnInit {
     let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
     this.results.push(answer);
   }
+  displayManySolutions(d: number, result: number) {
+    let lastM = this.m;
+    this.m *= d;
+    let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
+    this.results.push(answer);
+
+    for (let i = 1; i < d; i++) {
+      result += lastM;
+      let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
+      this.results.push(answer);
+    }
+  }
+  displayNumSol(d: number) {
+    let answer = `(${this.a}, ${this.m}) = ${d} - Кол-во решений`;
+    this.results.push(answer);
+
+    answer = `${d} | ${this.b} - да`;
+    this.results.push(answer);
+
+    answer = `${d}/ ${this.a} * x ≣ ${this.b} (mod ${this.m})`;
+    this.results.push(answer);
+  }
 
   calc() {
     if (
@@ -73,32 +95,20 @@ export class ComparisonComponent implements OnInit {
       this.b = this.numberConversionService.numberConversion(this.b, this.m);
       let tmp1 = this.a > this.m ? this.a : this.m;
       let tmp2 = this.a < this.m ? this.a : this.m;
-
       let d = this.gsdService.gsd(tmp1, tmp2);
 
       if (d == 1) {
         result = this.calcSimpleComparison();
         this.displayOneSolution(result);
       } else if (this.b % d == 0) {
+        this.displayNumSol(d);
         this.a /= d;
         this.b /= d;
         this.m /= d;
 
         result = this.calcSimpleComparison();
-
-        let lastM = this.m;
-        this.m *= d;
-        let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
-        this.results.push(answer);
-
-        for (let i = 1; i < d; i++) {
-          result += lastM;
-          let answer = `Ответ: x = ${result} + ${this.m} * k, k ∈ Z`;
-          this.results.push(answer);
-        }
-      } else {
-        this.results.push('Нет решений');
-      }
+        this.displayManySolutions(d, result);
+      } else this.results.push('Нет решений');
     }
   }
 }
