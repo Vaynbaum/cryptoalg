@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GsdService } from '../shared/services/gsd.service';
 import { NumberConversionService } from '../shared/services/number-conversion.service';
+import { ComprationService } from '../shared/services/compration.service';
 
 @Component({
   selector: 'app-comparison',
@@ -12,11 +13,10 @@ export class ComparisonComponent implements OnInit {
   b: number | undefined;
   m: number | undefined;
   adXi: number | undefined;
-  adYi: number | undefined;
-  addiv: number | undefined;
   results: string[] = [];
   constructor(
     private numberConversionService: NumberConversionService,
+    private comprationService: ComprationService,
     private gsdService: GsdService
   ) {}
 
@@ -42,8 +42,6 @@ export class ComparisonComponent implements OnInit {
   calcSimpleComparison() {
     this.gsdService.gsdAdvance(this.a, this.m, 0, 1, 1, 0);
     this.adXi = this.gsdService.adXi;
-    this.adYi = this.gsdService.adYi;
-    this.addiv = this.gsdService.addiv;
     this.adXi = this.numberConversionService.numberConversion(
       this.adXi,
       this.m

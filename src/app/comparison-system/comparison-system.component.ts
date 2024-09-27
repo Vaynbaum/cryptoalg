@@ -19,8 +19,6 @@ export class ComparisonSystemComponent implements OnInit {
   a: number | undefined;
 
   adXi: number | undefined;
-  adYi: number | undefined;
-  addiv: number | undefined;
 
   comparisons: Comparison[] = [];
   compShow: Comparison[] = [];
@@ -53,34 +51,89 @@ export class ComparisonSystemComponent implements OnInit {
         b: this.b,
         m: this.m,
       });
+    this.a = 0;
+    this.b = 0;
+    this.m = 0;
   }
 
   public pop() {
     this.comparisons.pop();
   }
 
-  calc() {
-    if (this.comparisons.length != 0) {
-      let M = 1;
-      let resM = 'M = ';
-      this.compShow = [];
-      this.comparisons.forEach((comp) => {
-        M *= comp.m;
-        resM += `${comp.m} * `;
-      });
-      resM = resM.slice(0, -2);
-      resM += `= ${M}`;
-      let element: HTMLElement = document.getElementById(
-        'systCompModule'
-      ) as HTMLElement;
-      element.innerHTML = resM;
+  displayResM(m: number) {
+    let resM = 'M = ';
 
-      this.comparisons.forEach((comp) => (comp.mi = M / comp.m));
-      this.comparisons.forEach((comp) => {
+    this.comparisons.forEach((comp) => {
+      resM += `${comp.m} * `;
+    });
+
+    resM = resM.slice(0, -2);
+    resM += `= ${m}`;
+
+    let element = document.getElementById('systCompModule');
+    element.innerHTML = resM;
+  }
+
+  multModules() {
+    let M = 1;
+    this.comparisons.forEach((comp) => {
+      M *= comp.m;
+    });
+
+    this.displayResM(M);
+    return M;
+  }
+
+  checkPrime() {
+    for (let i = 0; i < this.comparisons.length; i++) {
+      for (let j = i + 1; j < this.comparisons.length; j++) {
+        let a = this.comparisons[i].m;
+        let b = this.comparisons[j].m;
+        if (b > a) [a, b] = [b, a];
+        let res = this.gsdService.gsd(a, b);
+        if (res != 1) return false;
+      }
+    }
+    return true;
+  }
+
+  displayNoSolution() {
+    let element = document.getElementById('systCompModule');
+    element.innerHTML = 'Нет решения';
+  }
+  deepClone(data) {
+    return JSON.parse(JSON.stringify(data));
+  }
+
+  solvingComparison(comps) {
+    for (let c of comps) {
+      c.a = this.numberConversionService.numberConversion(c.a, c.m);
+      c.b = this.numberConversionService.numberConversion(c.b, c.m);
+
+      this.gsdService.gsdAdvance(this.a, this.m, 0, 1, 1, 0);
+      this.adXi = this.gsdService.adXi;
+      this.adXi = this.numberConversionService.numberConversion(
+        this.adXi,
+        this.m
+      );
+    }
+  }
+
+  calc() {
+    let comp = this.deepClone(this.comparisons);
+    if (comp.length != 0) {
+      if (!this.checkPrime()) {
+        this.displayNoSolution();
+        return;
+      }
+
+      this.compShow = [];
+      let M = this.multModules();
+
+      comp.forEach((comp) => (comp.mi = M / comp.m));
+      comp.forEach((comp) => {
         this.gsdService.gsdAdvance(comp.mi, comp.m, 0, 1, 1, 0);
         this.adXi = this.gsdService.adXi;
-        this.adYi = this.gsdService.adYi;
-        this.addiv = this.gsdService.addiv;
         comp.yi = this.numberConversionService.numberConversion(
           this.adXi,
           comp.m
@@ -88,15 +141,15 @@ export class ComparisonSystemComponent implements OnInit {
         this.compShow.push(comp);
       });
       let res = 0;
-      this.comparisons.forEach((comp) => {
+      comp.forEach((comp) => {
         res += comp.b * comp.mi * comp.yi;
       });
       res = this.numberConversionService.numberConversion(res, M);
 
       let answer = `Ответ: x = ${res} + ${M} * k, k ∈ Z`;
-      element = document.getElementById('resSystComp') as HTMLElement;
+      let element = document.getElementById('resSystComp');
       element.innerHTML = answer;
-      this.comparisons = [];
+      comp = [];
     }
   }
 }

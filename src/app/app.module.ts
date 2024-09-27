@@ -25,6 +25,7 @@ import { FermaService } from './shared/services/ferma.service';
 import { NumberConversionService } from './shared/services/number-conversion.service';
 import { FactorizationService } from './shared/services/factorisation.service';
 import { ReverseElementComponent } from './reverse-element/reverse-element.component';
+import { ComprationService } from './shared/services/compration.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, CompModule],
@@ -53,6 +54,7 @@ import { ReverseElementComponent } from './reverse-element/reverse-element.compo
     FermaService,
     NumberConversionService,
     FactorizationService,
+    ComprationService,
   ],
   bootstrap: [AppComponent],
 })
