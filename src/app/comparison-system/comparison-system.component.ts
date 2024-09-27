@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GsdService } from '../shared/services/gsd.service';
 import { NumberConversionService } from '../shared/services/number-conversion.service';
+import { ComprationService } from '../shared/services/compration.service';
 type Comparison = {
   a: number;
   b: number;
@@ -25,6 +26,7 @@ export class ComparisonSystemComponent implements OnInit {
 
   constructor(
     private numberConversionService: NumberConversionService,
+    private comprationService: ComprationService,
     private gsdService: GsdService
   ) {}
 
@@ -105,23 +107,16 @@ export class ComparisonSystemComponent implements OnInit {
     return JSON.parse(JSON.stringify(data));
   }
 
-  solvingComparison(comps) {
+  solvingComparisons(comps) {
     for (let c of comps) {
-      c.a = this.numberConversionService.numberConversion(c.a, c.m);
-      c.b = this.numberConversionService.numberConversion(c.b, c.m);
-
-      this.gsdService.gsdAdvance(this.a, this.m, 0, 1, 1, 0);
-      this.adXi = this.gsdService.adXi;
-      this.adXi = this.numberConversionService.numberConversion(
-        this.adXi,
-        this.m
-      );
+      c.b = this.comprationService.calc(c.a, c.b, c.m);
     }
+    console.log(comps)
   }
 
   calc() {
-    let comp = this.deepClone(this.comparisons);
-    if (comp.length != 0) {
+    let comps = this.deepClone(this.comparisons);
+    if (comps.length != 0) {
       if (!this.checkPrime()) {
         this.displayNoSolution();
         return;
@@ -129,9 +124,10 @@ export class ComparisonSystemComponent implements OnInit {
 
       this.compShow = [];
       let M = this.multModules();
+      this.solvingComparisons(comps)
 
-      comp.forEach((comp) => (comp.mi = M / comp.m));
-      comp.forEach((comp) => {
+      comps.forEach((comp) => (comp.mi = M / comp.m));
+      comps.forEach((comp) => {
         this.gsdService.gsdAdvance(comp.mi, comp.m, 0, 1, 1, 0);
         this.adXi = this.gsdService.adXi;
         comp.yi = this.numberConversionService.numberConversion(
@@ -141,7 +137,7 @@ export class ComparisonSystemComponent implements OnInit {
         this.compShow.push(comp);
       });
       let res = 0;
-      comp.forEach((comp) => {
+      comps.forEach((comp) => {
         res += comp.b * comp.mi * comp.yi;
       });
       res = this.numberConversionService.numberConversion(res, M);
@@ -149,7 +145,7 @@ export class ComparisonSystemComponent implements OnInit {
       let answer = `Ответ: x = ${res} + ${M} * k, k ∈ Z`;
       let element = document.getElementById('resSystComp');
       element.innerHTML = answer;
-      comp = [];
+      comps = [];
     }
   }
 }

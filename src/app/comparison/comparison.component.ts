@@ -16,7 +16,6 @@ export class ComparisonComponent implements OnInit {
   results: string[] = [];
   constructor(
     private numberConversionService: NumberConversionService,
-    private comprationService: ComprationService,
     private gsdService: GsdService
   ) {}
 

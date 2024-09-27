@@ -16,7 +16,7 @@ export class ComprationService {
     let res = (adXi * b) % m;
     return this.numberConversionService.numberConversion(res, m);
   }
-  calc(a, m, b) {
+  calc(a, b, m) {
     let result = 0;
 
     a = this.numberConversionService.numberConversion(a, m);
@@ -34,7 +34,7 @@ export class ComprationService {
       m /= d;
 
       result = this.calcSimpleComparison(a, b, m);
-      return result
+      return result;
     } else return false;
   }
 }
