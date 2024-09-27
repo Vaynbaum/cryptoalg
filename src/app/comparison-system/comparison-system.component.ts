@@ -89,10 +89,10 @@ export class ComparisonSystemComponent implements OnInit {
   checkPrime() {
     for (let i = 0; i < this.comparisons.length; i++) {
       for (let j = i + 1; j < this.comparisons.length; j++) {
-        let a = this.comparisons[i].m;
-        let b = this.comparisons[j].m;
-        if (b > a) [a, b] = [b, a];
-        let res = this.gsdService.gsd(a, b);
+        let tmp1 = this.comparisons[i].m;
+        let tmp2 = this.comparisons[j].m;
+        if (tmp2 > tmp1) [tmp1, tmp2] = [tmp2, tmp1];
+        let res = this.gsdService.gsd(tmp1, tmp2);
         if (res != 1) return false;
       }
     }
@@ -111,7 +111,12 @@ export class ComparisonSystemComponent implements OnInit {
     for (let c of comps) {
       c.b = this.comprationService.calc(c.a, c.b, c.m);
     }
-    console.log(comps)
+  }
+
+  displayRes(res, M) {
+    let answer = `Ответ: x = ${res} + ${M} * k, k ∈ Z`;
+    let element = document.getElementById('resSystComp');
+    element.innerHTML = answer;
   }
 
   calc() {
@@ -124,27 +129,20 @@ export class ComparisonSystemComponent implements OnInit {
 
       this.compShow = [];
       let M = this.multModules();
-      this.solvingComparisons(comps)
+      this.solvingComparisons(comps);
 
       comps.forEach((comp) => (comp.mi = M / comp.m));
-      comps.forEach((comp) => {
+      for (let comp of comps) {
         this.gsdService.gsdAdvance(comp.mi, comp.m, 0, 1, 1, 0);
-        this.adXi = this.gsdService.adXi;
-        comp.yi = this.numberConversionService.numberConversion(
-          this.adXi,
-          comp.m
-        );
+        let adXi = this.gsdService.adXi;
+        comp.yi = this.numberConversionService.numberConversion(adXi, comp.m);
         this.compShow.push(comp);
-      });
-      let res = 0;
-      comps.forEach((comp) => {
-        res += comp.b * comp.mi * comp.yi;
-      });
-      res = this.numberConversionService.numberConversion(res, M);
+      }
 
-      let answer = `Ответ: x = ${res} + ${M} * k, k ∈ Z`;
-      let element = document.getElementById('resSystComp');
-      element.innerHTML = answer;
+      let res = 0;
+      comps.forEach((comp) => (res += comp.b * comp.mi * comp.yi));
+      res = this.numberConversionService.numberConversion(res, M);
+      this.displayRes(res, M);
       comps = [];
     }
   }
