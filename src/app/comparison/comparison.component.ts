@@ -87,7 +87,6 @@ export class ComparisonComponent implements OnInit {
     ) {
       this.results = [];
       let result = 0;
-
       this.a = this.numberConversionService.numberConversion(this.a, this.m);
       this.b = this.numberConversionService.numberConversion(this.b, this.m);
       let tmp1 = this.a > this.m ? this.a : this.m;
