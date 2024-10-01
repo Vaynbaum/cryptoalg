@@ -1,10 +1,13 @@
 <app-title title="Обратный элементы в Zm:"></app-title>
 
 <app-input
+  label="a"
   (changeInput)="onChangeA($event)"
   holder="Введите число а"
 ></app-input>
+<br />
 <app-input
+  label="M"
   (changeInput)="onChangeM($event)"
   holder="Введите модуль M"
 ></app-input>
@@ -13,7 +16,7 @@
 
 <table *ngIf="a != undefined && a != 0 && m != undefined && m != 0">
   <thead>
-    <tr>
+    <tr *ngIf="adresult != undefined && adresult == 1">
       <th>r</th>
       <th>&ensp;q</th>
       <th>&ensp;x</th>

@@ -2,20 +2,23 @@
 <app-title title="a * x ≣ b (mod m)"></app-title>
 
 <app-input
+  label="a"
   (changeInput)="onChangeA($event)"
   holder="Введите число a"
 ></app-input>
 <br />
 
 <app-input
+  label="b"
   (changeInput)="onChangeB($event)"
   holder="Введите число b"
 ></app-input>
 <br />
 
 <app-input
+  label="m"
   (changeInput)="onChangeM($event)"
-  holder="Введите модуль M"
+  holder="Введите модуль m"
 ></app-input>
 <br />
 
@@ -23,6 +26,6 @@
 
 <div *ngIf="b != undefined && a != undefined && m != undefined && m > 0">
   <p *ngFor="let result of results">
-    {{result}}
+    {{ result }}
   </p>
 </div>

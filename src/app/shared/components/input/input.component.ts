@@ -7,7 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class InputComponent implements OnInit {
   num: number | undefined;
-
+  @Input()
+  label = '';
   @Input()
   holder = '';
   @Output()

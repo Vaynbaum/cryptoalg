@@ -101,21 +101,47 @@ export class ReverseElementComponent implements OnInit {
     element = document.getElementById('adresult3') as HTMLElement;
     element.innerHTML = answer;
   }
+  resetValueDisplayVar() {
+    this.adStrRi = '';
+    this.adStrQi = '';
+    this.adStrXi = '';
+    this.adStrYi = '';
+    this.adresult = null;
+  }
   initValueDisplayVar(adinp1: number, adinp2: number) {
     this.adStrRi = `${adinp1}<br/>${adinp2}<br/>`;
     this.adStrQi = `&ensp;-<br/>&ensp;-<br/>`;
     this.adStrXi = `&ensp;1<br/>&ensp;0<br/>`;
     this.adStrYi = `&ensp;0<br/>&ensp;1<br/>`;
   }
+  displayError() {
+    let element = document.getElementById('adresult2') as HTMLElement;
+    element.innerHTML = 'Нет обратного элемента';
+    element = document.getElementById('adresult3') as HTMLElement;
+    element.innerHTML = '';
 
+    element = document.getElementById('adri2') as HTMLElement;
+    element.innerHTML = '';
+
+    element = document.getElementById('adqi2') as HTMLElement;
+    element.innerHTML = '';
+
+    element = document.getElementById('adxi2') as HTMLElement;
+    element.innerHTML = '';
+
+    element = document.getElementById('adyi2') as HTMLElement;
+    element.innerHTML = '';
+  }
   adGsdCalc() {
     let a = this.a;
     let m = this.m;
-
+    this.resetValueDisplayVar();
     if (a != undefined && a != 0 && m != undefined && m != 0) {
       this.initValueDisplayVar(a, m);
+
       this.adresult = this.gsdAdvance(a, m, 0, 1, 1, 0);
-      this.display(a, m);
+      if (this.adresult == 1) this.display(a, m);
+      else this.displayError();
     }
   }
 }
