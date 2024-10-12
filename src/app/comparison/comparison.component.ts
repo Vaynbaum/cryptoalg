@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GsdService } from '../shared/services/gsd.service';
 import { NumberConversionService } from '../shared/services/number-conversion.service';
-import { ComprationService } from '../shared/services/compration.service';
 
 @Component({
   selector: 'app-comparison',

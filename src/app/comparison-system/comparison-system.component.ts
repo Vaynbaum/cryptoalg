@@ -53,9 +53,6 @@ export class ComparisonSystemComponent implements OnInit {
         b: this.b,
         m: this.m,
       });
-    this.a = 0;
-    this.b = 0;
-    this.m = 0;
   }
 
   public pop() {
