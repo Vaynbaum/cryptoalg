@@ -48,20 +48,6 @@ export class ApplicationTheoremFermaComponent implements OnInit {
     this.m = m;
   }
 
-  fact() {
-    this.array = [];
-    let num = this.m;
-    while (num % 2 == 0) {
-      this.array.push({ num: 2 });
-      num /= 2;
-    }
-    let arr = this.factorizationService.allFact(num, this.array);
-    this.array=[]
-    arr.forEach((item) => {
-      if (item != 1) this.array.push({ num: item });
-    });
-  }
-
   calculateSystem() {
     if (this.comparisons.length != 0) {
       let M = 1;
@@ -104,8 +90,12 @@ export class ApplicationTheoremFermaComponent implements OnInit {
       this.m != undefined &&
       this.m > 0
     ) {
-      this.fact();
       let answer = ``;
+      if (this.factorizationService.isPrime(this.m)) {
+      } else {
+        this.array = this.factorizationService.fact(this.m);
+      }
+
       this.array.sort((a, b) => {
         return a.num - b.num;
       });
