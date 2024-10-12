@@ -23,7 +23,7 @@ export class FactorizationService {
   fact(num: number) {
     let array = [];
     while (num % 2 == 0) {
-      array.push({ num: 2 });
+      array.push(2);
       num /= 2;
     }
     let arr = this.allFact(num, array).filter((item) => item != 1);

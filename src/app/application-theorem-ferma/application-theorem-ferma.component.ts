@@ -143,15 +143,17 @@ export class ApplicationTheoremFermaComponent implements OnInit {
           return a.num - b.num;
         });
         answer = this.showComplexM(answer);
-
         this.array.forEach((item) => {
           item.pow = this.k % (item.num - 1);
-          let isMutuallyPrime = this.gsdService.gsd(this.a, item.num) == 1;
-          let b = isMutuallyPrime ? this.a ** item.pow % item.num : 0;
+          let tmp1 = this.a > item.num ? this.a : item.num;
+          let tmp2 = this.a < item.num ? this.a : item.num;
+          let d = this.gsdService.gsd(tmp1, tmp2);
+          let b = d == 1 ? this.a ** item.pow % item.num : 0;
 
           this.comparisons.push({ a: 1, b: b, m: item.num });
           answer = this.showX(answer, item);
         });
+
         answer = this.showCompr(answer);
         this.showAnswer(answer, 'appAnswerCompModule');
         this.calculateSystem();
