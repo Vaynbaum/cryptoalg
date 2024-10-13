@@ -84,6 +84,7 @@ export class PrimitiveRootComponent implements OnInit {
     if (this.m != undefined && this.m > 0) {
       this.objrev = [];
       let feu = this.eulerService.main(this.m);
+      console.log(feu)
       let answer = '';
       let numbers = this.factorizationService
         .fact(feu)
@@ -93,6 +94,7 @@ export class PrimitiveRootComponent implements OnInit {
         .map((combination) => combination.reduce((a, b) => a * b, 1))
         .sort((a, b) => a - b);
       answer = this.showDividers(answer, feu, numbers, products);
+      console.log(numbers,products)
 
       let contenderRoot = 2;
       let answer2 = '';
