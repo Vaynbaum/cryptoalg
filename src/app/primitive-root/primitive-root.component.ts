@@ -80,8 +80,15 @@ export class PrimitiveRootComponent implements OnInit {
     return answer;
   }
 
+  checkExistRoot() {
+    let nums = this.factorizationService.fact(this.m);
+    if (this.m == 2 || this.m == 4) return true;
+    console.log(nums);
+    return false;
+  }
+
   calc() {
-    if (this.m != undefined && this.m > 0) {
+    if (this.m != undefined && this.m > 0 && this.checkExistRoot()) {
       this.objrev = [];
       let feu = this.eulerService.main(this.m);
       let answer = '';
