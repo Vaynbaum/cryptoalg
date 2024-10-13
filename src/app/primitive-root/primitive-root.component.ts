@@ -83,9 +83,7 @@ export class PrimitiveRootComponent implements OnInit {
   calc() {
     if (this.m != undefined && this.m > 0) {
       this.objrev = [];
-      console.log(this.m)
       let feu = this.eulerService.main(this.m);
-      console.log(feu)
       let answer = '';
       let numbers = this.factorizationService
         .fact(feu)
@@ -95,11 +93,11 @@ export class PrimitiveRootComponent implements OnInit {
         .map((combination) => combination.reduce((a, b) => a * b, 1))
         .sort((a, b) => a - b);
       answer = this.showDividers(answer, feu, numbers, products);
-      console.log(numbers,products)
 
       let contenderRoot = 2;
       let answer2 = '';
-      while (true) {
+      let notFinded = true;
+      while (notFinded) {
         let tmp1 = contenderRoot > this.m ? contenderRoot : this.m;
         let tmp2 = contenderRoot < this.m ? contenderRoot : this.m;
         let d = this.gsdService.gsd(tmp1, tmp2);
@@ -117,7 +115,10 @@ export class PrimitiveRootComponent implements OnInit {
               break;
             }
           }
-          if (finded) break;
+          if (finded) {
+            notFinded = false;
+            break;
+          }
         }
         contenderRoot += 1;
       }
