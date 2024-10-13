@@ -10,6 +10,7 @@ import { GsdService } from '../shared/services/gsd.service';
 })
 export class PrimitiveRootComponent implements OnInit {
   m: number | undefined;
+  objrev: any[] = [];
 
   constructor(
     private gsdService: GsdService,
@@ -62,8 +63,26 @@ export class PrimitiveRootComponent implements OnInit {
     element.innerHTML = answer;
   }
 
+  showPrime(answer, contenderRoot, d) {
+    answer += `<br>(${contenderRoot}, ${this.m}) = ${d}<br>`;
+    return answer;
+  }
+
+  showCompr(answer, contenderRoot, item, res, res1) {
+    answer += `${contenderRoot}<sup>${item}</sup> ≣ ${res} (mod ${this.m}) ${
+      res1 ? '≣' : '≢'
+    } 1<br>`;
+    return answer;
+  }
+
+  showRoot(answer, root) {
+    answer += `a = ${root}`;
+    return answer;
+  }
+
   calc() {
     if (this.m != undefined && this.m > 0) {
+      this.objrev = [];
       let feu = this.eulerService.main(this.m);
       let answer = '';
       let numbers = this.factorizationService
@@ -76,17 +95,36 @@ export class PrimitiveRootComponent implements OnInit {
       answer = this.showDividers(answer, feu, numbers, products);
 
       let contenderRoot = 2;
+      let answer2 = '';
       while (true) {
-        if (this.gsdService.gsd(contenderRoot, this.m) == 1) {
+        let tmp1 = contenderRoot > this.m ? contenderRoot : this.m;
+        let tmp2 = contenderRoot < this.m ? contenderRoot : this.m;
+        let d = this.gsdService.gsd(tmp1, tmp2);
+        if (d == 1) {
+          answer2 = this.showPrime(answer2, contenderRoot, d);
           let finded = true;
-          for (let item of products)
-            if (contenderRoot ** item % this.m == 1) finded = false;
-
+          for (let item of products.slice(0, -1)) {
+            let res = contenderRoot ** item % this.m;
+            let resIs1 = res == 1;
+            answer2 = this.showCompr(answer2, contenderRoot, item, res, resIs1);
+            if (resIs1) {
+              finded = false;
+              break;
+            }
+          }
           if (finded) break;
         }
         contenderRoot += 1;
       }
-      console.log(contenderRoot);
+      answer += answer2;
+      answer = this.showRoot(answer, contenderRoot);
+
+      for (let i = 0; i < feu ; i++) {
+        this.objrev.push({
+          pow: i,
+          res: contenderRoot ** i % this.m,
+        });
+      }
       this.showAnswer(answer, 'primitiveresult');
     }
   }

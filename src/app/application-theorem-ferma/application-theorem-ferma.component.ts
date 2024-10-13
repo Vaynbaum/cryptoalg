@@ -129,6 +129,7 @@ export class ApplicationTheoremFermaComponent implements OnInit {
       this.m > 0
     ) {
       let answer = ``;
+      this.compShow = [];
       if (this.factorizationService.isPrime(this.m)) {
         if (this.gsdService.gsd(this.a, this.m) == 1) {
           let k = this.k % (this.m - 1);

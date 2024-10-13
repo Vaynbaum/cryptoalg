@@ -9,3 +9,14 @@
 <app-buttons (click)="calc()" title="Вычислить"></app-buttons>
 
 <p id="primitiveresult" *ngIf="m != undefined && m > 0"></p>
+<table *ngIf="m != undefined && m > 0">
+  <td>
+    <tr align="right">ɣ |</tr>
+    <tr>u<span >({{ m }})</span>|</tr>
+  </td>
+
+  <td *ngFor="let obj of objrev">
+    <tr> {{ obj.pow }} </tr>
+    <tr>{{ obj.res }}</tr>
+  </td>
+</table>
