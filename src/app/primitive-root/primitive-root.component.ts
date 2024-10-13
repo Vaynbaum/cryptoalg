@@ -83,6 +83,7 @@ export class PrimitiveRootComponent implements OnInit {
   calc() {
     if (this.m != undefined && this.m > 0) {
       this.objrev = [];
+      console.log(this.m)
       let feu = this.eulerService.main(this.m);
       console.log(feu)
       let answer = '';
