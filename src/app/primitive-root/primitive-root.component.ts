@@ -100,12 +100,14 @@ export class PrimitiveRootComponent implements OnInit {
         let tmp1 = contenderRoot > this.m ? contenderRoot : this.m;
         let tmp2 = contenderRoot < this.m ? contenderRoot : this.m;
         let d = this.gsdService.gsd(tmp1, tmp2);
+        console.log(contenderRoot, this.m, d);
         if (d == 1) {
           answer2 = this.showPrime(answer2, contenderRoot, d);
           let finded = true;
           for (let item of products.slice(0, -1)) {
             let res = contenderRoot ** item % this.m;
             let resIs1 = res == 1;
+            console.log(products, res, contenderRoot, item, this.m);
             answer2 = this.showCompr(answer2, contenderRoot, item, res, resIs1);
             if (resIs1) {
               finded = false;
@@ -119,7 +121,7 @@ export class PrimitiveRootComponent implements OnInit {
       answer += answer2;
       answer = this.showRoot(answer, contenderRoot);
 
-      for (let i = 0; i < feu ; i++) {
+      for (let i = 0; i < feu; i++) {
         this.objrev.push({
           pow: i,
           res: contenderRoot ** i % this.m,
