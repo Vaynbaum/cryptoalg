@@ -26,6 +26,7 @@ import { NumberConversionService } from './shared/services/number-conversion.ser
 import { FactorizationService } from './shared/services/factorisation.service';
 import { ReverseElementComponent } from './reverse-element/reverse-element.component';
 import { ComprationService } from './shared/services/compration.service';
+import { PrimitiveRootComponent } from './primitive-root/primitive-root.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, CompModule],
@@ -48,6 +49,7 @@ import { ComprationService } from './shared/services/compration.service';
     ComparisonComponent,
     ComparisonSystemComponent,
     ApplicationTheoremFermaComponent,
+    PrimitiveRootComponent
   ],
   providers: [
     GsdService,
