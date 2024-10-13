@@ -81,15 +81,35 @@ export class PrimitiveRootComponent implements OnInit {
   }
 
   checkExistRoot() {
-    let nums = this.factorizationService.fact(this.m);
+    let nums = this.factorizationService.fact(this.m).map((item) => item.num);
     if (this.m == 2 || this.m == 4) return true;
-    console.log(nums);
+
+    let dict = new Map();
+    for (let num of nums) {
+      if (dict.has(num)) dict.set(num, dict.get(num) + 1);
+      else dict.set(num, 1);
+    }
+    let dict1 = Array.from(dict, ([name, value]) => ({ name, value }));
+    if (dict1.length == 1 && dict1[0].name % 2 == 1) return true;
+    else if (dict1.length == 2) {
+      if (dict1[0].name == 2) {
+        if (dict1[0].value == 1) return dict1[1].name % 2 == 1;
+      }
+      if (dict1[1].name == 2) {
+        if (dict1[0].value == 1) return dict1[1].name % 2 == 1;
+      }
+    }
     return false;
   }
 
   calc() {
-    if (this.m != undefined && this.m > 0 && this.checkExistRoot()) {
+    if (this.m != undefined && this.m > 0) {
       this.objrev = [];
+      if (!this.checkExistRoot()) {
+        let answer = 'Первообразный корень не существует';
+        this.showAnswer(answer, 'primitiveresult');
+        return;
+      }
       let feu = this.eulerService.main(this.m);
       let answer = '';
       let numbers = this.factorizationService
@@ -108,14 +128,12 @@ export class PrimitiveRootComponent implements OnInit {
         let tmp1 = contenderRoot > this.m ? contenderRoot : this.m;
         let tmp2 = contenderRoot < this.m ? contenderRoot : this.m;
         let d = this.gsdService.gsd(tmp1, tmp2);
-        console.log(contenderRoot, this.m, d);
         if (d == 1) {
           answer2 = this.showPrime(answer2, contenderRoot, d);
           let finded = true;
           for (let item of products.slice(0, -1)) {
             let res = contenderRoot ** item % this.m;
             let resIs1 = res == 1;
-            console.log(products, res, contenderRoot, item, this.m);
             answer2 = this.showCompr(answer2, contenderRoot, item, res, resIs1);
             if (resIs1) {
               finded = false;
