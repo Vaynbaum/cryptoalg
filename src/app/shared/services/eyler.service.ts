@@ -14,7 +14,6 @@ export class EylerService {
     arr = this.fermaService.ferma_hidden(n);
     let dif = arr[0] - arr[1];
     let sum = arr[0] + arr[1];
-
     if (sum == 1 || dif == 1) {
       this.addValue(sum);
       this.addValue(arr[0] - arr[1]);
@@ -36,11 +35,9 @@ export class EylerService {
     }
     this.allFact(num);
     let mult = 1;
-
     this.dict.forEach((obj) => {
-      if (obj.num != 1) {
+      if (obj.num != 1)
         mult *= Math.pow(obj.num, obj.cnt) - Math.pow(obj.num, obj.cnt - 1);
-      }
     });
     return mult;
   }

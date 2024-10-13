@@ -38,11 +38,7 @@ export class PrimitiveRootComponent implements OnInit {
     return result;
   }
 
-  calculateProducts(combinations) {
-    return combinations.map((combination) =>
-      combination.reduce((a, b) => a * b, 1)
-    );
-  }
+
 
   showDividers(answer, feu, numbers, products) {
     answer += `φ(${this.m}) = ${feu} = `;
@@ -106,8 +102,10 @@ export class PrimitiveRootComponent implements OnInit {
     if (this.m != undefined && this.m > 0) {
       this.objrev = [];
       if (!this.checkExistRoot()) {
-        let answer = 'Первообразный корень не существует';
-        this.showAnswer(answer, 'primitiveresult');
+        this.showAnswer(
+          'Первообразный корень не существует',
+          'primitiveresult'
+        );
         return;
       }
       let feu = this.eulerService.main(this.m);
