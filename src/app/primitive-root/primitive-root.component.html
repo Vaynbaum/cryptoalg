@@ -1,0 +1,11 @@
+<app-title title="Первообразный корень:"></app-title>
+<app-input
+  label="m"
+  (changeInput)="onChange($event)"
+  holder="Введите модуль m"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Вычислить"></app-buttons>
+
+<p id="primitiveresult" *ngIf="m != undefined && m > 0"></p>
