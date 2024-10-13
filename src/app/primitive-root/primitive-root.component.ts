@@ -75,15 +75,18 @@ export class PrimitiveRootComponent implements OnInit {
         .sort((a, b) => a - b);
       answer = this.showDividers(answer, feu, numbers, products);
 
-      let notFindedRoot = true;
       let contenderRoot = 2;
-      while (notFindedRoot) {
+      while (true) {
         if (this.gsdService.gsd(contenderRoot, this.m) == 1) {
-          
-        } else {
-          contenderRoot += 1;
+          let finded = true;
+          for (let item of products)
+            if (contenderRoot ** item % this.m == 1) finded = false;
+
+          if (finded) break;
         }
+        contenderRoot += 1;
       }
+      console.log(contenderRoot);
       this.showAnswer(answer, 'primitiveresult');
     }
   }
