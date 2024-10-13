@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FactorizationService } from '../shared/services/factorisation.service';
 import { EylerService } from '../shared/services/eyler.service';
+import { GsdService } from '../shared/services/gsd.service';
 
 @Component({
   selector: 'app-primitive-root',
@@ -11,6 +12,7 @@ export class PrimitiveRootComponent implements OnInit {
   m: number | undefined;
 
   constructor(
+    private gsdService: GsdService,
     private factorizationService: FactorizationService,
     private eulerService: EylerService
   ) {}
@@ -47,7 +49,13 @@ export class PrimitiveRootComponent implements OnInit {
       answer += `${item} * `;
     });
     answer = answer.slice(0, -3);
-    answer += '<br>';
+    answer += `<br>Делители: {`;
+    products.forEach((item) => {
+      answer += `${item}, `;
+    });
+    answer = answer.slice(0, -2);
+    answer += `}<br>`;
+    return answer;
   }
   showAnswer(answer, id) {
     let element: HTMLElement = document.getElementById(id) as HTMLElement;
@@ -65,12 +73,17 @@ export class PrimitiveRootComponent implements OnInit {
       let products = this.generateUniqueCombinations(numbers)
         .map((combination) => combination.reduce((a, b) => a * b, 1))
         .sort((a, b) => a - b);
-      this.showDividers(answer, feu, numbers, products);
+      answer = this.showDividers(answer, feu, numbers, products);
 
       let notFindedRoot = true;
       let contenderRoot = 2;
-      // while (notFindedRoot) {}
-
+      while (notFindedRoot) {
+        if (this.gsdService.gsd(contenderRoot, this.m) == 1) {
+          
+        } else {
+          contenderRoot += 1;
+        }
+      }
       this.showAnswer(answer, 'primitiveresult');
     }
   }
