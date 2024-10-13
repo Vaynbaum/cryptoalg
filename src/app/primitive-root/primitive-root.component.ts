@@ -69,7 +69,7 @@ export class PrimitiveRootComponent implements OnInit {
 
       let notFindedRoot = true;
       let contenderRoot = 2;
-      while (notFindedRoot) {}
+      // while (notFindedRoot) {}
 
       this.showAnswer(answer, 'primitiveresult');
     }
