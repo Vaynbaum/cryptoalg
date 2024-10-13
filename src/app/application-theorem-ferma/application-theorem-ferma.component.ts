@@ -85,7 +85,7 @@ export class ApplicationTheoremFermaComponent implements OnInit {
     }
   }
 
-  createAnswer(k, n, res, answer) {
+  createAnswer(k, res, answer) {
     answer += `k = ${this.k} (mod ${this.m - 1}) = ${k}<br>`;
     answer += `${this.a}<sup>${k}</sup> (mod ${this.m}) = ${res}<br>`;
     return answer;
@@ -131,10 +131,10 @@ export class ApplicationTheoremFermaComponent implements OnInit {
       let answer = ``;
       if (this.factorizationService.isPrime(this.m)) {
         if (this.gsdService.gsd(this.a, this.m) == 1) {
-          let k = this.numConvService.numberConversion(this.k, this.m - 1);
+          let k = this.k % (this.m - 1);
           let n = this.a ** k;
           let res = n % this.m;
-          answer = this.createAnswer(k, n, res, answer);
+          answer = this.createAnswer(k, res, answer);
           this.showAnswer(answer, 'appAnswerCompModule');
         }
       } else {

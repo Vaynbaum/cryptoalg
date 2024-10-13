@@ -27,6 +27,7 @@ import { FactorizationService } from './shared/services/factorisation.service';
 import { ReverseElementComponent } from './reverse-element/reverse-element.component';
 import { ComprationService } from './shared/services/compration.service';
 import { PrimitiveRootComponent } from './primitive-root/primitive-root.component';
+import { EylerService } from './shared/services/eyler.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, CompModule],
@@ -49,7 +50,7 @@ import { PrimitiveRootComponent } from './primitive-root/primitive-root.componen
     ComparisonComponent,
     ComparisonSystemComponent,
     ApplicationTheoremFermaComponent,
-    PrimitiveRootComponent
+    PrimitiveRootComponent,
   ],
   providers: [
     GsdService,
@@ -57,6 +58,7 @@ import { PrimitiveRootComponent } from './primitive-root/primitive-root.componen
     NumberConversionService,
     FactorizationService,
     ComprationService,
+    EylerService,
   ],
   bootstrap: [AppComponent],
 })
