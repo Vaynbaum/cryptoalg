@@ -28,6 +28,7 @@ import { ReverseElementComponent } from './reverse-element/reverse-element.compo
 import { ComprationService } from './shared/services/compration.service';
 import { PrimitiveRootComponent } from './primitive-root/primitive-root.component';
 import { EylerService } from './shared/services/eyler.service';
+import { IndicativeComparison2Component } from './indicative-comparison-2/indicative-comparison-2.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, CompModule],
@@ -51,6 +52,7 @@ import { EylerService } from './shared/services/eyler.service';
     ComparisonSystemComponent,
     ApplicationTheoremFermaComponent,
     PrimitiveRootComponent,
+    IndicativeComparison2Component
   ],
   providers: [
     GsdService,
