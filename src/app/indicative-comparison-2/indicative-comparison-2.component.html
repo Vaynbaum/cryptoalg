@@ -1,0 +1,31 @@
+<app-title title="c^x ≣ b (mod m)"></app-title>
+
+<app-input
+  label="c"
+  (changeInput)="onChangeA($event)"
+  holder="Введите число c"
+></app-input>
+<br />
+
+<app-input
+  label="b"
+  (changeInput)="onChangeB($event)"
+  holder="Введите число b"
+></app-input>
+<br />
+
+<app-input
+  label="m"
+  (changeInput)="onChangeM($event)"
+  holder="Введите модуль m"
+></app-input>
+<br />
+
+<app-input
+  label="a"
+  (changeInput)="onChangeM($event)"
+  holder="Введите первообразный корень"
+></app-input>
+<br />
+
+<app-buttons (click)="calc()" title="Посчитать"></app-buttons>
